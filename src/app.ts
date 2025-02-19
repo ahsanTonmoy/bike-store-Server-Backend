@@ -10,7 +10,10 @@ app.use('/api', productRoutes)
 app.use('/api', productRoutes)
 //
 app.get('/', (req: Request, res: Response) => {
-  res.send('bike server is on v.3.00')
+  res.status(200).json({
+    message: 'Bike store server is on',
+    success: true,
+  })
 })
 app.get('/test', (req: Request, res: Response) => {
   res.send('bike server is on test')
