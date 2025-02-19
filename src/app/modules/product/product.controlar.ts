@@ -6,7 +6,6 @@ const createProduct = async (req: Request, res: Response) => {
   try {
     // body
     const { product: productData } = req.body
-
     //   func
     const result = await productServices.createProduct(productData) //
     //
@@ -23,7 +22,9 @@ const createProduct = async (req: Request, res: Response) => {
 // get all data
 const allProducts = async (req: Request, res: Response) => {
   try {
-    const result = await productServices.getproducts()
+    const searchTerm = req.query.searchTerm as string
+
+    const result = await productServices.getproducts(searchTerm)
     //
     res.status(200).json({
       message: 'Bike created successfully',
