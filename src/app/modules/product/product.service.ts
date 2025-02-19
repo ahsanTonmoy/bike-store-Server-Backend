@@ -33,8 +33,22 @@ const getProductById = async (productId: string) => {
   return product
 }
 
+// Update a product
+const updateProduct = async (productId: string, updates: Partial<Product>) => {
+  const updatedProduct = await productModel.findByIdAndUpdate(
+    productId,
+    updates,
+    {
+      new: true,
+    },
+  )
+
+  return updatedProduct
+}
+
 export const productServices = {
   createProduct,
   getproducts,
   getProductById,
+  updateProduct,
 }

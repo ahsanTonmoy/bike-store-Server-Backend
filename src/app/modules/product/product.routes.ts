@@ -10,7 +10,7 @@ router.get('/products', productontrolers.allProducts)
 // Get a single product by ID
 router.get('/products/:productId', productontrolers.getProductById)
 // Update a product by ID
-
+router.put('/products/:productId', productontrolers.updateProduct)
 // Delete a product by ID
 
 export const productRoutes = router

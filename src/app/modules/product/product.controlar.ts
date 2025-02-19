@@ -65,8 +65,39 @@ const getProductById = async (
   }
 }
 
+// Update a Product
+const updateProduct = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const Updates = req.body
+    const updatedProduct = await productServices.updateProduct(
+      req.params.productId,
+      Updates,
+    )
+
+    if (!updatedProduct) {
+      return res.status(404).json({
+        message: 'Product not found',
+        success: false,
+      })
+    }
+
+    res.status(200).json({
+      message: 'Product updated successfully',
+      success: true,
+      data: updatedProduct,
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
 export const productontrolers = {
   createProduct,
   allProducts,
   getProductById,
+  updateProduct,
 }
