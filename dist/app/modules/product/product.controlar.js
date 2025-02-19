@@ -32,12 +32,34 @@ const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
 // get all data
 const allProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const result = yield product_service_1.productServices.getproducts();
+        const searchTerm = req.query.searchTerm;
+        const result = yield product_service_1.productServices.getproducts(searchTerm);
         //
         res.status(200).json({
-            message: 'Bike created successfully',
+            message: 'List of our bike',
             success: true,
             data: result,
+        });
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+const getProductById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { productId } = req.params;
+        // Call the service to get the product by ID
+        const product = yield product_service_1.productServices.getProductById(productId);
+        if (!product) {
+            return res.status(404).json({
+                message: 'Product not found',
+                success: false,
+            });
+        }
+        res.status(200).json({
+            message: 'Find product successfully',
+            success: true,
+            data: product,
         });
     }
     catch (error) {
@@ -47,4 +69,5 @@ const allProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 exports.productontrolers = {
     createProduct,
     allProducts,
+    getProductById,
 };

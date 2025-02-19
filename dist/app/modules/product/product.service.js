@@ -20,11 +20,28 @@ const createProduct = (product) => __awaiter(void 0, void 0, void 0, function* (
     return result;
 });
 // get product
-const getproducts = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield product_model_1.default.find();
-    return result;
+const getproducts = (searchTerm) => __awaiter(void 0, void 0, void 0, function* () {
+    let query = {};
+    if (searchTerm) {
+        query = {
+            $or: [
+                { name: new RegExp(searchTerm, 'i') },
+                { brand: new RegExp(searchTerm, 'i') },
+                { category: new RegExp(searchTerm, 'i') },
+            ],
+        };
+    }
+    const products = yield product_model_1.default.find(query);
+    return products;
+});
+//
+// Get a specific product by ID
+const getProductById = (productId) => __awaiter(void 0, void 0, void 0, function* () {
+    const product = yield product_model_1.default.findById(productId);
+    return product;
 });
 exports.productServices = {
     createProduct,
     getproducts,
+    getProductById,
 };

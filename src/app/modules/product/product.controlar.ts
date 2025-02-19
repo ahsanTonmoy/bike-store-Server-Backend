@@ -26,6 +26,7 @@ const allProducts = async (req: Request, res: Response) => {
 
     const result = await productServices.getproducts(searchTerm)
     //
+
     res.status(200).json({
       message: 'List of our bike',
       success: true,

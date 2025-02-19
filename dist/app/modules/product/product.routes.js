@@ -12,6 +12,7 @@ router.post('/products', product_controlar_1.productontrolers.createProduct);
 // Get all products
 router.get('/products', product_controlar_1.productontrolers.allProducts);
 // Get a single product by ID
+router.get('/products/:productId', product_controlar_1.productontrolers.getProductById);
 // Update a product by ID
 // Delete a product by ID
 exports.productRoutes = router;
