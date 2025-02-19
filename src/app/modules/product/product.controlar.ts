@@ -1,4 +1,4 @@
-import { Request, Response } from 'express'
+import { NextFunction, Request, Response } from 'express'
 import { productServices } from './product.service'
 
 // post a data
@@ -27,7 +27,7 @@ const allProducts = async (req: Request, res: Response) => {
     const result = await productServices.getproducts(searchTerm)
     //
     res.status(200).json({
-      message: 'Bike created successfully',
+      message: 'List of our bike',
       success: true,
       data: result,
     })
@@ -36,7 +36,36 @@ const allProducts = async (req: Request, res: Response) => {
   }
 }
 
+const getProductById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { productId } = req.params
+
+    // Call the service to get the product by ID
+    const product = await productServices.getProductById(productId)
+
+    if (!product) {
+      return res.status(404).json({
+        message: 'Product not found',
+        success: false,
+      })
+    }
+
+    res.status(200).json({
+      message: 'Find product successfully',
+      success: true,
+      data: product,
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
 export const productontrolers = {
   createProduct,
   allProducts,
+  getProductById,
 }

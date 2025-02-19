@@ -25,7 +25,16 @@ const getproducts = async (searchTerm?: string) => {
   return products
 }
 
+//
+// Get a specific product by ID
+const getProductById = async (productId: string) => {
+  const product = await productModel.findById(productId)
+
+  return product
+}
+
 export const productServices = {
   createProduct,
   getproducts,
+  getProductById,
 }

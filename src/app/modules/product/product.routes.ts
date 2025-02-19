@@ -8,7 +8,7 @@ router.post('/products', productontrolers.createProduct)
 // Get all products
 router.get('/products', productontrolers.allProducts)
 // Get a single product by ID
-
+router.get('/products/:productId', productontrolers.getProductById)
 // Update a product by ID
 
 // Delete a product by ID
