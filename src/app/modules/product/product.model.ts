@@ -16,5 +16,5 @@ const ProductSchema = new Schema<Product>({
   inStock: { type: Boolean, required: true },
 })
 
-const productModel = model<Product>('productModel', ProductSchema)
+const productModel = model<Product>('product', ProductSchema)
 export default productModel

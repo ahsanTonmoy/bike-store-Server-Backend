@@ -51,7 +51,6 @@ const deleteProduct = async (productId: string) => {
   const deletedProduct = await productModel.findByIdAndDelete(productId)
   return deletedProduct
 }
-
 export const productServices = {
   createProduct,
   getproducts,
