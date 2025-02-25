@@ -46,9 +46,16 @@ const updateProduct = async (productId: string, updates: Partial<Product>) => {
   return updatedProduct
 }
 
+// Delete a product
+const deleteProduct = async (productId: string) => {
+  const deletedProduct = await productModel.findByIdAndDelete(productId)
+  return deletedProduct
+}
+
 export const productServices = {
   createProduct,
   getproducts,
   getProductById,
   updateProduct,
+  deleteProduct,
 }
