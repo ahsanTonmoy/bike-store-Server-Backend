@@ -1,8 +1,7 @@
-'use strict'
-Object.defineProperty(exports, '__esModule', { value: true })
-const mongoose_1 = require('mongoose')
-//
-const ProductSchema = new mongoose_1.Schema({
+import mongoose, { Schema } from 'mongoose'
+import { Product } from './product.interface'
+
+const ProductSchema: Schema = new Schema<Product>({
   name: { type: String, required: true },
   brand: { type: String, required: true },
   price: { type: Number, required: true },
@@ -12,8 +11,9 @@ const ProductSchema = new mongoose_1.Schema({
     required: true,
   },
   description: { type: String, required: true },
-  quantity: { type: Number, required: true },
+  quantity: { type: Number, required: true, min: 0 },
   inStock: { type: Boolean, required: true },
+  createdAt: { type: Date, default: Date.now },
 })
-const productModel = (0, mongoose_1.model)('product', ProductSchema)
-exports.default = productModel
+
+export const productModel = mongoose.model<Product>('products', ProductSchema)

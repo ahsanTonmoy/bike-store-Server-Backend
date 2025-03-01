@@ -9,108 +9,64 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.productControlers = void 0;
+exports.productController = void 0;
 const product_service_1 = require("./product.service");
-// post a data
+// create products
 const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        // body
-        const { product: productData } = req.body;
-        //   func
-        const result = yield product_service_1.productServices.createProduct(productData); //
-        //
-        res.status(200).json({
+        const product = yield product_service_1.productService.createProduct(req.body);
+        res.status(201).json({
             message: 'Bike created successfully',
-            success: true,
-            data: result,
-        });
-    }
-    catch (error) {
-        console.log(error);
-    }
-});
-// get all data
-const allProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const searchTerm = req.query.searchTerm;
-        const result = yield product_service_1.productServices.getproducts(searchTerm);
-        //
-        res.status(200).json({
-            message: 'List of our bike',
-            success: true,
-            data: result,
-        });
-    }
-    catch (error) {
-        console.log(error);
-    }
-});
-const getProductById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const { productId } = req.params;
-        // Call the service to get the product by ID
-        const product = yield product_service_1.productServices.getProductById(productId);
-        if (!product) {
-            return res.status(404).json({
-                message: 'Product not found',
-                success: false,
-            });
-        }
-        res.status(200).json({
-            message: 'Find product successfully',
             success: true,
             data: product,
         });
     }
     catch (error) {
-        console.log(error);
+        res.status(400).json({ message: 'product not create', error });
     }
 });
-// Update a Product
+//  get all products
+const getAllProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const searchTerm = req.query.searchTerm;
+        const products = yield product_service_1.productService.getAllProducts(searchTerm);
+        res.status(201).json({
+            message: 'Bikes retrieved successfully',
+            success: true,
+            data: products,
+        });
+    }
+    catch (error) {
+        res.status(400).json({ message: 'product no create', error });
+    }
+});
+// find product by id
+const getProductById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const product = yield product_service_1.productService.getProductById(req.params.id);
+    return product
+        ? res.json(product)
+        : res.status(404).json({ message: 'Product not found' });
+});
+//  update product
 const updateProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const Updates = req.body;
-        const updatedProduct = yield product_service_1.productServices.updateProduct(req.params.productId, Updates);
-        if (!updatedProduct) {
-            return res.status(404).json({
-                message: 'Product not found',
-                success: false,
-            });
-        }
-        res.status(200).json({
-            message: 'Product updated successfully',
-            success: true,
-            data: updatedProduct,
-        });
-    }
-    catch (error) {
-        console.log(error);
-    }
+    const product = yield product_service_1.productService.updateProduct(req.params.id, req.body);
+    return product
+        ? res.json({
+            massege: 'product updated',
+            data: product,
+        })
+        : res.status(404).json({ message: 'Product not found' });
 });
-// Delete a Product
+//  delete a product
 const deleteProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const productId = req.params.productId;
-        const deletedProduct = yield product_service_1.productServices.deleteProduct(productId);
-        if (!deletedProduct) {
-            return res.status(404).json({
-                message: 'Product not found',
-                success: false,
-            });
-        }
-        res.status(200).json({
-            message: 'Product deleted successfully',
-            success: true,
-            data: deletedProduct,
-        });
-    }
-    catch (error) {
-        console.log(error);
-    }
+    const product = yield product_service_1.productService.deleteProduct(req.params.id);
+    return product
+        ? res.json({ message: 'Product deleted' })
+        : res.status(404).json({ message: 'Product not found' });
 });
-exports.productControlers = {
+exports.productController = {
     createProduct,
-    allProducts,
+    getAllProducts,
     getProductById,
     updateProduct,
     deleteProduct,

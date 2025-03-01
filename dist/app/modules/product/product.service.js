@@ -8,19 +8,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.productServices = void 0;
-const product_model_1 = __importDefault(require("./product.model"));
-//create product
-const createProduct = (product) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield product_model_1.default.create(product);
-    return result;
+exports.productService = void 0;
+const product__model_1 = require("./product..model");
+// create a product
+const createProduct = (productData) => __awaiter(void 0, void 0, void 0, function* () {
+    return yield product__model_1.productModel.create(productData);
 });
-// get product
-const getproducts = (searchTerm) => __awaiter(void 0, void 0, void 0, function* () {
+// get all products & search
+const getAllProducts = (searchTerm) => __awaiter(void 0, void 0, void 0, function* () {
     let query = {};
     if (searchTerm) {
         query = {
@@ -31,30 +27,24 @@ const getproducts = (searchTerm) => __awaiter(void 0, void 0, void 0, function* 
             ],
         };
     }
-    const products = yield product_model_1.default.find(query);
+    const products = yield product__model_1.productModel.find(query);
     return products;
 });
-//
-// Get a specific product by ID
-const getProductById = (productId) => __awaiter(void 0, void 0, void 0, function* () {
-    const product = yield product_model_1.default.findById(productId);
-    return product;
+// find product by id
+const getProductById = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    return yield product__model_1.productModel.findById(id);
 });
-// Update a product
-const updateProduct = (productId, updates) => __awaiter(void 0, void 0, void 0, function* () {
-    const updatedProduct = yield product_model_1.default.findByIdAndUpdate(productId, updates, {
-        new: true,
-    });
-    return updatedProduct;
+// update product
+const updateProduct = (id, productData) => __awaiter(void 0, void 0, void 0, function* () {
+    return yield product__model_1.productModel.findByIdAndUpdate(id, productData, { new: true });
 });
-// Delete a product
-const deleteProduct = (productId) => __awaiter(void 0, void 0, void 0, function* () {
-    const deletedProduct = yield product_model_1.default.findByIdAndDelete(productId);
-    return deletedProduct;
+// delete a product
+const deleteProduct = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    return yield product__model_1.productModel.findByIdAndDelete(id);
 });
-exports.productServices = {
+exports.productService = {
     createProduct,
-    getproducts,
+    getAllProducts,
     getProductById,
     updateProduct,
     deleteProduct,
