@@ -40,8 +40,22 @@ const getProductById = (productId) => __awaiter(void 0, void 0, void 0, function
     const product = yield product_model_1.default.findById(productId);
     return product;
 });
+// Update a product
+const updateProduct = (productId, updates) => __awaiter(void 0, void 0, void 0, function* () {
+    const updatedProduct = yield product_model_1.default.findByIdAndUpdate(productId, updates, {
+        new: true,
+    });
+    return updatedProduct;
+});
+// Delete a product
+const deleteProduct = (productId) => __awaiter(void 0, void 0, void 0, function* () {
+    const deletedProduct = yield product_model_1.default.findByIdAndDelete(productId);
+    return deletedProduct;
+});
 exports.productServices = {
     createProduct,
     getproducts,
     getProductById,
+    updateProduct,
+    deleteProduct,
 };

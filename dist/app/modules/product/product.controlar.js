@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.productontrolers = void 0;
+exports.productControlers = void 0;
 const product_service_1 = require("./product.service");
 // post a data
 const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -66,8 +66,52 @@ const getProductById = (req, res) => __awaiter(void 0, void 0, void 0, function*
         console.log(error);
     }
 });
-exports.productontrolers = {
+// Update a Product
+const updateProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const Updates = req.body;
+        const updatedProduct = yield product_service_1.productServices.updateProduct(req.params.productId, Updates);
+        if (!updatedProduct) {
+            return res.status(404).json({
+                message: 'Product not found',
+                success: false,
+            });
+        }
+        res.status(200).json({
+            message: 'Product updated successfully',
+            success: true,
+            data: updatedProduct,
+        });
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+// Delete a Product
+const deleteProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const productId = req.params.productId;
+        const deletedProduct = yield product_service_1.productServices.deleteProduct(productId);
+        if (!deletedProduct) {
+            return res.status(404).json({
+                message: 'Product not found',
+                success: false,
+            });
+        }
+        res.status(200).json({
+            message: 'Product deleted successfully',
+            success: true,
+            data: deletedProduct,
+        });
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+exports.productControlers = {
     createProduct,
     allProducts,
     getProductById,
+    updateProduct,
+    deleteProduct,
 };

@@ -15,5 +15,5 @@ const ProductSchema = new mongoose_1.Schema({
     quantity: { type: Number, required: true },
     inStock: { type: Boolean, required: true },
 });
-const productModel = (0, mongoose_1.model)('productModel', ProductSchema);
+const productModel = (0, mongoose_1.model)('product', ProductSchema);
 exports.default = productModel;
