@@ -37,6 +37,6 @@ const ProductSchema = new mongoose_1.Schema({
     description: { type: String, required: true },
     quantity: { type: Number, required: true, min: 0 },
     inStock: { type: Boolean, required: true },
-    createdAt: { type: Date, default: Date.now },
-});
+    // createdAt: { type: Date, default: Date.now },
+}, { timestamps: true });
 exports.productModel = mongoose_1.default.model('products', ProductSchema);

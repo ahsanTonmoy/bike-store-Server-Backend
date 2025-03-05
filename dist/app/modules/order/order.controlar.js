@@ -16,7 +16,7 @@ const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         const order = yield order_services_1.orderServices.createOrder(req.body);
         //
         res.status(201).json({
-            message: 'order place successfully',
+            message: 'Order created successfully',
             success: true,
             data: order,
         });
@@ -30,7 +30,7 @@ const getOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const result = yield order_services_1.orderServices.getAllOrders();
         res.status(201).json({
-            massege: 'order list show',
+            massege: 'Oreder retrieved successfully',
             success: true,
             data: result,
         });
