@@ -6,7 +6,7 @@ const createOrder = async (req: Request, res: Response) => {
     const order = await orderServices.createOrder(req.body)
     //
     res.status(201).json({
-      message: 'order place successfully',
+      message: 'Order created successfully',
       success: true,
       data: order,
     })
@@ -19,7 +19,7 @@ const getOrder = async (req: Request, res: Response) => {
   try {
     const result = await orderServices.getAllOrders()
     res.status(201).json({
-      massege: 'order list show',
+      massege: 'Oreder retrieved successfully',
       success: true,
       data: result,
     })
