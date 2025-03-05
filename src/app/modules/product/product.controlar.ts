@@ -32,7 +32,11 @@ const getAllProducts = async (req: Request, res: Response) => {
 const getProductById = async (req: Request, res: Response) => {
   const product = await productService.getProductById(req.params.id)
   return product
-    ? res.json(product)
+    ? res.status(201).json({
+        message: 'Bikes retrieved successfully',
+        success: true,
+        data: product,
+      })
     : res.status(404).json({ message: 'Product not found' })
 }
 //  update product
@@ -40,16 +44,21 @@ const updateProduct = async (req: Request, res: Response) => {
   const product = await productService.updateProduct(req.params.id, req.body)
   return product
     ? res.json({
-        massege: 'product updated',
+        massege: 'Bike updated successfully',
+        success: true,
         data: product,
       })
     : res.status(404).json({ message: 'Product not found' })
 }
 //  delete a product
 const deleteProduct = async (req: Request, res: Response) => {
-  const product = await productService.deleteProduct(req.params.id)
-  return product
-    ? res.json({ message: 'Product deleted' })
+  const deletedProduct = await productService.deleteProduct(req.params.id)
+  return deletedProduct
+    ? res.status(200).json({
+        message: 'Bike deleted successfully',
+        success: true,
+        data: deletedProduct,
+      })
     : res.status(404).json({ message: 'Product not found' })
 }
 
