@@ -4,6 +4,13 @@
 
 The **Bike-store-Server-Backend** is a backend service built with **Node.js, Express, TypeScript, and MongoDB**. It provides a complete product and order management system for a bike store, allowing users to **create, retrieve, update, and delete products and orders** while ensuring data validation and integrity using **Mongoose** and **Zod**.
 
+## 🛠 Technologies Used
+
+- **Node.js** + **Express.js** - Backend framework
+- **TypeScript** - Type safety
+- **MongoDB + Mongoose** - Database & ODM
+- **Zod** - Data validation
+
 ## ✨ Features
 
 - 🛍 **Product Management:** Add, update, retrieve, and delete bikes with detailed specifications.
@@ -83,15 +90,6 @@ npm run build && npm start:prod
 | GET    | `/api/orders/:id`     | Get an order by ID            |
 | DELETE | `/api/orders/:id`     | Delete an order               |
 | GET    | `/api/orders/revenue` | Get total revenue from orders |
-
----
-
-## 🛠 Technologies Used
-
-- **Node.js** + **Express.js** - Backend framework
-- **TypeScript** - Type safety
-- **MongoDB + Mongoose** - Database & ODM
-- **Zod** - Data validation
 
 ---
 
