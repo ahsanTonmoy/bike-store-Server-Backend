@@ -1,4 +1,4 @@
-# 🚴 bike-store-Server-Backend
+# 🚴 bike-store-Server
 
 ## 📌 Project Overview
 
