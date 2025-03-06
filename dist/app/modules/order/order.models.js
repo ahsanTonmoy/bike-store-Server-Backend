@@ -30,6 +30,5 @@ const OrderSchema = new mongoose_1.Schema({
     product: { type: mongoose_1.Schema.Types.ObjectId, ref: 'Product', required: true },
     quantity: { type: Number, required: true, min: 1 },
     totalPrice: { type: Number, required: false },
-    createdAt: { type: Date, default: Date.now },
 });
 exports.orderModel = mongoose_1.default.model('Order', OrderSchema);
