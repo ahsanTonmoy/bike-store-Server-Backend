@@ -1,19 +1,18 @@
-import { Request, Response, NextFunction } from "express";
-import { ZodSchema } from "zod";
-import { ZodError } from "zod";
+import { Request, Response, NextFunction } from 'express'
+import { ZodSchema } from 'zod'
 const validateRequest = (schema: ZodSchema<any>) => {
   return (req: Request, res: Response, next: NextFunction) => {
-    const result = schema.safeParse(req.body);
+    const result = schema.safeParse(req.body)
     if (!result.success) {
       return res.status(400).json({
-        message: "Validation failed",
+        message: 'Validation failed',
         success: false,
         error: result.error.format(), // Detailed Zod error response
-      });
+      })
     }
-    next();
-  };
-};
+    next()
+  }
+}
 
 // interface ErrorResponse {
 //   message: string;
@@ -50,4 +49,4 @@ const validateRequest = (schema: ZodSchema<any>) => {
 //   res.status(statusCode).json(errorResponse);
 // };
 
-export const errorHandler = validateRequest;
+export const errorHandler = validateRequest
